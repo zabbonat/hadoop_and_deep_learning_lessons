@@ -1,0 +1,23 @@
+HDFS
+https://searchdatamanagement.techtarget.com/definition/Hadoop-Distributed-File-System-HDFS
+https://www.geeksforgeeks.org/hdfs-commands/
+
+YARN
+https://searchdatamanagement.techtarget.com/definition/Apache-Hadoop-YARN-Yet-Another-Resource-Negotiator
+
+MapReduce
+https://www.html.it/pag/51684/map-reduce-architettura-e-funzionamento/
+https://docs.marklogic.com/guide/mapreduce/hadoop
+https://www.youtube.com/watch?v=PhdRyrmbRYQ
+questions:
+"how hadoop or mapredu can estimate the complexity of a task to run on the suitable node?"
+
+Kafka
+https://en.wikipedia.org/wiki/Apache_Kafka
+
+Pig
+https://en.wikipedia.org/wiki/Apache_Pig
+
+Hive
+https://www.janbasktraining.com/blog/hive-commands-and-examples/
+https://www.geeksforgeeks.org/acid-properties-in-dbms/
