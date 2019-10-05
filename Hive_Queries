@@ -1,3 +1,18 @@
 # Accessing Hive online
 http://demo.gethue.com/hue/editor/?type=hiv
 
+# Useful reference for Hive commands
+https://www.tutorialspoint.com/hive/
+
+# Hive Queries - 
+
+# Create a new table - 
+
+CREATE TABLE IF NOT EXISTS employee ( eid int, name String,
+salary String, destination String)
+COMMENT ‘Employee details’
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ‘\t’
+LINES TERMINATED BY ‘\n’
+STORED AS TEXTFILE;
+
