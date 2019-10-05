@@ -1,0 +1,9 @@
+MySQL installation on local machine - 
+https://www.liquidweb.com/kb/install-mysql-windows/
+
+
+Sample data - 
+http://www.mysqltutorial.org/mysql-sample-database.aspx
+
+Doing SQL Online - 
+http://sqlfiddle.com/#!9/a6c585/1
