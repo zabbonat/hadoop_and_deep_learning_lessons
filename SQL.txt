@@ -85,6 +85,39 @@ GROUP BY department_id
 HAVING MAX(salary)>10000 ;
 
 
+Joins:
+
+EQUI Join – 
+     
+SELECT e.employee_id, e.last_name,        
+           e.department_id, d.department_id, d.location_id 
+FROM EMPLOYEES e, DEPARTMENTS d 
+WHERE e.department_id = d.department_id;
+
+Non-EQUI Join –  
+
+SELECT e.last_name, e.salary, j.grade_level 
+FROM EMPLOYEES e, JOB_GRADES j 
+WHERE e.salary BETWEEN 
+j.lowest_sal AND j.highest_sal;
+
+LEFT OUTER JOIN - 
+
+SELECT e.employee_id, e.last_name,        
+           e.department_id, d.department_id
+FROM EMPLOYEES e  LEFT OUTER JOIN DEPARTMENTS d 
+ON (e.department_id = d.department_id);
+
+RIGHT OUTER JOIN – 
+
+SELECT e.employee_id, e.last_name,        
+           e.department_id, d.department_id
+FROM EMPLOYEES e RIGHT OUTER JOIN DEPARTMENTS d 
+ON (e.department_id = d.department_id);
+
+
+
+
 
 
 
