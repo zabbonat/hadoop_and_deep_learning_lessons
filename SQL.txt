@@ -7,3 +7,91 @@ http://www.mysqltutorial.org/mysql-sample-database.aspx
 
 Doing SQL Online - 
 http://sqlfiddle.com/#!9/a6c585/1
+
+
+Sample queries - 
+
+On 1 table - 
+SELECT * 
+FROM EMPLOYEES;
+
+SELECT * 
+FROM EMPLOYEES
+WHERE first_name = ”Francesco”;
+
+SELECT * 
+FROM EMPLOYEES
+ORDER BY last_name DESC;
+
+SELECT last_name, salary 
+FROM EMPLOYEES 
+WHERE salary <= 3000;
+
+SELECT last_name, salary 
+FROM EMPLOYEES 
+WHERE salary BETWEEN 2500 AND 3500;
+
+SELECT employee_id, last_name, salary, manager_id 
+FROM EMPLOYEES 
+WHERE manager_id IN (100, 101, 201);
+
+SELECT first_name 
+FROM EMPLOYEES 
+WHERE first_name LIKE 'S%';
+
+SELECT employee_id, last_name, job_id, salary 
+FROM EMPLOYEES 
+WHERE salary >=10000 AND job_id LIKE '%MAN%’;
+
+SELECT employee_id, last_name, job_id, salary 
+FROM EMPLOYEES 
+WHERE salary >= 10000 OR job_id LIKE '%MAN%’;
+
+SELECT last_name, job_id 
+FROM EMPLOYEES 
+WHERE job_id NOT IN ('IT_PROG', 'ST_CLERK', 'SA_REP');
+
+
+SELECT last_name, job_id, department_id, hire_date 
+FROM EMPLOYEES 
+ORDER BY hire_date ;
+
+
+Aggregate functions - 
+
+SELECT AVG(salary), MAX(salary), 
+MIN(salary), SUM(salary) 
+FROM EMPLOYEES 
+WHERE job_id LIKE '%REP%';
+
+
+SELECT COUNT(*) 
+FROM EMPLOYEES 
+WHERE department_id = 50;
+
+
+Using Group By - 
+
+SELECT AVG(salary) 
+FROM employees 
+GROUP BY department_id ;
+
+
+Using HAVING - 
+
+SELECT department_id, MAX(salary) 
+FROM employees 
+GROUP BY department_id 
+HAVING MAX(salary)>10000 ;
+
+
+
+
+
+
+
+
+
+
+
+
