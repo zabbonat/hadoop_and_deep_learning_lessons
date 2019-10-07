@@ -1,0 +1,42 @@
+
+# HDFS commands
+
+
+> hdfs dfs  - Check all the HDFS commands
+
+> sbin/start-all.sh : To start all the Hadoop services
+
+ > jps :  To check list of active services  and their port numbers
+
+ > hdfs dfs -ls / : Prints all the directories present in HDFS
+
+ > dfs -mkdir <folder name> : Create a new directory in HDFS
+
+ > hdfs dfs -touchz <file_path> : Creates an empty file
+
+ > hdfs dfs -copyFromLocal <local file path> <dest(present on hdfs)> : To copy the files/folders from local file system to HDFS store
+
+ > hdfs dfs -cat <path> : Prints the file contents
+
+
+ > hdfs dfs -copyToLocal <<srcfile(on hdfs)> <local file dest> : To copy files/folders from HDFS store to the local file system
+
+ > hdfs dfs -cp <src(on hdfs)> <dest(on hdfs)> :  Copy files with in HDFS
+
+ > hdfs dfs -rmr <filename/directoryName> : Deletes a file from HDFS recursively
+
+ > hdfs dfs -du <dirName> : Gives the size of each file in the directory
+
+ > hdfs dfs -setrep -R -w 6 <filename/directoryName> : Change the replication factor of file/folder inside HDFS. By default it is 3.
+
+
+
+
+
+
+
+
+
+
+
+
