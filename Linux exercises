@@ -1,0 +1,23 @@
+Login as guest (password is guest) 
+
+Find the present Directory 
+
+Write the root directory structure 
+
+Write a few commands available in /bin and /sbin directory 
+
+Find the guest directory 
+
+Write the permissions of guest directory 
+
+Create a new Directory test in guest directory 
+
+Copy the file /etc/resolv.conf in test directory 
+
+Rename the test directory to testing 
+
+Delete the testing directory 
+
+Change the permissions of guest directory to 700 
+
+Change the permissions of /tmp directory to 700
