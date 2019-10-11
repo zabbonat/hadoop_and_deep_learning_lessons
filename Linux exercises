@@ -1,3 +1,63 @@
+LINUX commands that we discussed yesterday:
+
+ls - listing all the files in the directory
+
+man -  manual for help regarding a particular command 
+
+cp - copy a file from one location to another 
+
+mv - move a file from one location to another 
+
+pwd – to know the present working directory  
+
+cd - change directory to a given path 
+
+mkdir - to create a new directory
+
+rmdir - to remove a directory
+
+chmod - change the permissions of a file or directory
+
+cat - Dumping contents of file to standard output
+
+less -  View a big file in parts by moving forward and backwards
+
+head - View first 10 lines of a file by default. head -n50 file.txt gives first 50 lines in file.txt
+
+tail - View last 10 lines of a file by default.
+
+ps - To view current running processes
+
+top - To view CPU usage of all the processes
+
+kill - to terminate a process using process id
+
+vi editor related commands:
+
+Open vi
+
+vi - opens vi 
+
+ vi filename - opens vi on file_name 
+
+ view filename - opens vi in read-only mode on file name 
+
+Close vi: press ESC key and 
+
+:q - quit (it will query you if changes were made, y or n) 
+
+:q! quit without saving 
+
+:x - save and exit
+
+
+Practice LINUX commands online:
+https://bellard.org/jslinux/vm.html?url=https://bellard.org/jslinux/buildroot-x86.cfg
+https://itsfoss.com/online-linux-terminals/
+
+
+Some practice exercises:
+
 Login as guest (password is guest) 
 
 Find the present Directory 
@@ -21,3 +81,4 @@ Delete the testing directory
 Change the permissions of guest directory to 700 
 
 Change the permissions of /tmp directory to 700
+
