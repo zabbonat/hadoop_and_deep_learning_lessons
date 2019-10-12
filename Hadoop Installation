@@ -8,12 +8,54 @@ otherwise the virtual machine will be reall slow.
 
 Go to following link - 
 
+Step 1
 https://www.cloudera.com/downloads/hortonworks-sandbox.html
 
+Step 2:
 Select the "Download Now" button under "Hortonworks HDP"
 
+Step 3:
 You will be asked to select the installation type in a drop down, Select "Virtual box" and click on Let's go
 
+Step 4:
 Now you will be asked to Sign Up, Provide your details 
+In why are you downloading this product, Select "For self learning"
+and give your details and select continue
 
-In why are you downloading this product, Select
+Step 5:
+Once the page refreshes, you will be asked to select from to hadoop versions,
+Hadoop 2.5
+Hadoop 2.7
+
+Select 2.5 for memory constraints because 2.5 is 11GB and 2.7 is 16GB
+
+
+2) Through stand alone set up, installing Hadoop, Java and others separately
+
+Installation of single node cluster on to Linux operating system:
+Single node cluster means only one DataNode running and setting up all the NameNode, DataNode, 
+ResourceManager and NodeManager on a single machine. This is used for studying and testing purposes. 
+
+Prerequisites: 
+
+VIRTUAL BOX: it is used for installing the operating system on it.
+OPERATING SYSTEM: You can install Hadoop on Linux based operating systems. Ubuntu distribution is strongly recommended.     
+JAVA: You need to install the Java 8 64 bitpackage on your system.
+HADOOP: From Hadoop version 2.7.3 to 3.2.0 package.
+
+
+Step 1:
+Download Java 64 bit from websites like this: https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html 
+and extract the tar file with tar –xvf file.tar
+Download the Hadoop Package from https://archive.apache.org/dist/hadoop/core/hadoop-2.7.3/hadoop-2.7.3.tar.gz
+Use wget in Linux. Extract the Tar File
+
+Step 2:
+Add the Hadoop and Java Path into the .bashrc. Use vi or gedit. 
+Check Java and Hadoop Version after installation with Hadoop version and java –version commands. 
+
+Step 3:
+Hadoop Configuration: cd hadoop-ver/etc/Hadoop and edit core-site.xml
+
+
+
