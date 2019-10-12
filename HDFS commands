@@ -80,6 +80,18 @@ hdfs dfs –du -s –h /user/data/hdfs_data
 
 Change the replication factor of a main folder on run-time - 
 hdfs dfs –Ddfs.replication=3 –put /user/data/hdfs_data/large_file.txt /user/hdfs_main
+
+
+# HDFS Exercises - 
+
+Create h1b directory under your user space /user/YOUR_OS_USERNAME
+Copy Directory /public/h1b/h1b_kaggle to /user/YOUR_OS_USERNAME/h1b
+Preview last 1 KB of Data
+Get the size of the data set for the newly copied directory.
+Get metadata of the directory copied /user/YOUR_OS_USERNAME/h1b/h1b_kaggle
+
+
+
   
 
 
