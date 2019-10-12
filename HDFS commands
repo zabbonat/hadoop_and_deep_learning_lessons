@@ -30,13 +30,56 @@
  > hdfs dfs -setrep -R -w 6 <filename/directoryName> : Change the replication factor of file/folder inside HDFS. By default it is 3.
 
 
+Using help - 
+
+> hadoop fs –help ls
+
+Get file sizes in readable format - 
+> hadoop fs –ls –S –h /public/hdfs_dataset 
+
+Search for files with in a directory - 
+> hadoop fs –ls –R /public | grep order 
+
+Create a new directory -
+> hadoop fs –mkdir /user/hadoop/hdfs_new
+
+Recursively remove a directory - 
+> hadoop fs –rm -R /user/hadoop/hdfs_new
+
+Remove an empty directory - 
+> hadoop fs –rmdir –-ignore-fail-on-non-empty  /user/hadoop/hdfs_new
+
+Previewing the files - 
+
+Display entire file - 
+> hadoop fs -help cat
+
+Display starting of file -
+> hadoop fs –cat /public/txt_files/*|more 
+
+Display last 1 KB of a large file - 
+> hadoop fs –help tail
+> hadoop fs –tail /public/txt_files/large_file.txt
 
 
+Getting metadata of files in a HDFS folder - 
+> hdfs fsck /user/data/hdfs_data –files 
+> hdfs fsck /user/data/hdfs_data –files -blocks 
+> hdfs fsck /user/data/hdfs_data –files -blocks -locations 
 
+Get the size in human readable format - 
 
+Summary of the size occupied, size remaining, % of size occupied etc..,
+> hdfs dfs –df –h /user/data/hdfs_data
 
+Disk usage of directories and all the subdirectories inside the main directory
+> hdfs dfs –du –h /user/data/hdfs_data 
 
+Only main directory disk usage summary
+hdfs dfs –du -s –h /user/data/hdfs_data 
 
-
+Change the replication factor of a main folder on run-time - 
+hdfs dfs –Ddfs.replication=3 –put /user/data/hdfs_data/large_file.txt /user/hdfs_main
+  
 
 
