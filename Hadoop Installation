@@ -1,0 +1,19 @@
+There are multiple ways through which you can download and configure hadoop in your local machine, 
+
+
+1) Through Sandbox provided by Horton works: 
+
+Note: To do this installation type, you should have at least 8 GB of RAM and at least 50 GB of free hard disk space, 
+otherwise the virtual machine will be reall slow.
+
+Go to following link - 
+
+https://www.cloudera.com/downloads/hortonworks-sandbox.html
+
+Select the "Download Now" button under "Hortonworks HDP"
+
+You will be asked to select the installation type in a drop down, Select "Virtual box" and click on Let's go
+
+Now you will be asked to Sign Up, Provide your details 
+
+In why are you downloading this product, Select
