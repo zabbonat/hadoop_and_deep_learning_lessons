@@ -16,3 +16,27 @@ FIELDS TERMINATED BY ‘\t’
 LINES TERMINATED BY ‘\n’
 STORED AS TEXTFILE;
 
+
+# Use partitioned by - 
+CREATE TABLE employees 
+(id INT, firstname STRING, lastname 	STRING) 
+PARTITIONED BY (department String);
+
+# Using Bucketing - 
+CREATE TABLE customers 
+(id INT, firstname STRING, lastname STRING) 
+PARTITIONED BY (orderID INT) 
+INTO 5 BUCKETS;
+
+
+# Word count in a text file in Hive QL -
+
+DROP TABLE IF EXISTS docs; 
+CREATE TABLE docs (line STRING); 
+LOAD DATA INPATH 'input_file' OVERWRITE INTO TABLE docs;
+CREATE TABLE word_counts AS 
+SELECT word, count(1) AS count FROM 
+	(SELECT explode(split(line, '\s')) AS word FROM docs) temp 
+GROUP BY word 
+ORDER BY word;
+
