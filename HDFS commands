@@ -1,6 +1,7 @@
 
 # HDFS commands
 
+http://localhost:8080
 
 > hdfs dfs  - Check all the HDFS commands
 
@@ -28,6 +29,17 @@
  > hdfs dfs -du <dirName> : Gives the size of each file in the directory
 
  > hdfs dfs -setrep -R -w 6 <filename/directoryName> : Change the replication factor of file/folder inside HDFS. By default it is 3.
+
+
+Create a path of directories - 
+
+hdfs dfs -mkdir -p /this/is/a/new/directory
+hdfs dfs -ls  - Only HIVE directories (user created directories)
+hdfs dfs -ls / - lists enture directory structure
+wget http://media.sundog-soft.com/hadoop/ml-100k/u.data - downloading the data in to local 
+hdfs dfs -put source_hadoop/word_count.txt /dest_hadoop
+hadoop fs -ls -R
+hadoop fs -copyFromLocal u.data ml-100k/u.data
 
 
 Using help - 
