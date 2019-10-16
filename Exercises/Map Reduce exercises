@@ -3,12 +3,16 @@ Sample Map reduce exercises for practice -
 
 For movie lens data set - 
 
-List of fields available: USER ID, MOVIE ID, RATING, TIMESTAMP
+=> List of fields available: USER ID, MOVIE ID, RATING, TIMESTAMP
 
-Ratings counter - Key: MOVIE ID, Value: RATING
+=> Ratings counter - Key: MOVIE ID, Value: RATING
 
-Average rating per user - Key: USER ID, Value: RATING
+=> Average rating per user - Key: USER ID, Value: RATING
 
-Average rating per movie - Key: MOVIE ID, Value: RATING
+=> Average rating per movie - Key: MOVIE ID, Value: RATING
 
-No of movies each user watched - Key: USER ID, Value: MOVIE ID
+=> No of movies each user watched - Key: USER ID, Value: MOVIE ID
+
+
+
+Others - 
