@@ -25,4 +25,8 @@ Others -
 
 => Word frequency counter using regular expressions
 
+=> Sorting the frequency counter results using chained Map Reduce jobs
+
+
+
 

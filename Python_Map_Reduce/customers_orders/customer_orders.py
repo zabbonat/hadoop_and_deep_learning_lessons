@@ -26,11 +26,11 @@ class MRCustomerOrderCounter(MRJob):
         yield custID, sum(orders)
 
     def mapper_make_orders_key(self, custID, count):
-        yield '%04d'%int(count), custID
+        yield '%04.02f'%float(count), custID
 
     def reducer_output_orders(self, count, customers):
         for custID in customers:
-            yield count, custID
+            yield custID,float(count)
 
 if __name__ == '__main__':
     MRCustomerOrderCounter.run()
