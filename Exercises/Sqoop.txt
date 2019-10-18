@@ -1,0 +1,79 @@
+
+# Sqoop commands - 
+
+> sqoop - to see list of available commands 
+
+> sqoop help list-databases - for knowing syntax of a particular Sqoop command
+
+
+# Sqoop – IMPORT Command: Import a table 'employees' in employees database in to HDFS
+
+> sqoop import --connect jdbc:mysql://10.0.2.2/employees 
+        --username root
+        --password root 
+        --table employees
+
+# Sqoop – IMPORT Command with target directory: Import a table 'employees' in employees database in to directory employees in HDFS
+
+> sqoop import --connect jdbc:mysql://10.0.2.2/employees 
+        --username root 
+        --password root 
+        --table employees --m 1 
+        --target-dir /employees
+
+# Sqoop – IMPORT Command with Where Clause: Import only a section of table
+
+> sqoop import --connect jdbc:mysql://10.0.2.2/employees 
+        --username root
+        --password root 
+        --table employees --m 3 
+        --where "emp_no > 49000" 
+        --target-dir /Latest_Employees
+
+# Sqoop – Incremental Import: Import only the new data
+
+> sqoop import --connect jdbc:mysql://10.0.2.2/employees 
+        --username root
+        --password root  
+        --table employees 
+        --target-dir /Latest_Employees 
+        --incremental append 
+        --target-direck-column emp_no 
+        --last-value 499999
+
+
+# Sqoop – Import All Tables: Import all the tables in employees database
+
+  >	sqoop import-all-tables --connect jdbc:mysql://10.0.2.2/employees 
+          --username root
+          --password root  
+
+# Sqoop – List Databases:
+
+  > sqoop list-databases --connect jdbc:mysql://10.0.2.2/ 
+	      --username root
+          --password root
+
+# Sqoop – List Tables: List all the tables in employees tables. Best for checking the database or Mysql connection
+  
+  > sqoop list-tables --connect jdbc:mysql://10.0.2.2/employees 
+	      --username root
+          --password root
+
+# Sqoop – Export: Export employees directory in HDFS to employees database, emp table in MySQL
+
+  > sqoop export 
+        --connect jdbc:mysql://10.0.2.2/employees 
+        --username root 
+        --table emp 
+        --export-dir /user/edureka/employees
+
+# Sqoop – Codegen: Codegen generates the DAO class automatically. It generates DAO class in Java, based on the Table schema structure.
+
+  > sqoop codegen 
+        --connect jdbc:mysql://10.0.2.2/employees             
+        --username root 
+        --table employees
+
+
+
