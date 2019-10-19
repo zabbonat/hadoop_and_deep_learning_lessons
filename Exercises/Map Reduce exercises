@@ -27,6 +27,13 @@ Others -
 
 => Sorting the frequency counter results using chained Map Reduce jobs
 
+=> Customer orders count (based on individual customer)
+
+=> Most popular movie
+
+=> Most popular super hero
+
+=> Similar movies (recommendation engine based on cosine similarity) 
 
 
 
