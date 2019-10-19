@@ -1,6 +1,7 @@
 # Adding sample data 
 Step 1: Download employees.sql from 
 https://gitlab.cs.wwu.edu/tranerj/sql_1/blob/master/employees.sql
+https://gitlab.cs.wwu.edu/tranerj/sql_1/raw/master/employees.sql
 
 Step 2: Download and Install MySQL in your machine
 
