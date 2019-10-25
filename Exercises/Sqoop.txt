@@ -1,4 +1,45 @@
-# Adding sample data 
+# To connect to Mysql on horton works sandbox - 
+#Connect to terminal using Putty (if using windows) or ssh maria_dev@127.0.0.1 -p 2222
+# mysql -u root -p (password is hadoop)
+# show databases; - List all the available databases
+# use hive; -  Use hive data base (which comes inbuilt
+# show tables; - List all the tables in movie lens database
+# exit - To exit the MySQL prompt
+
+
+# Adding sample data  - For testing on Hortonworks sandbox
+
+# mysql -u root -p (password is hadoop)
+# create database movielens;
+# wget http://media.sundog-soft.com/hadoop/movielens.sql - Download the file from Internet on to Hortonworks sandbox
+# less movielens.sql - To preview the downloaded file
+# SET NAMES 'utf8'; - Set some variables for character format
+# SET CHARACTER SET 'utf8';
+# use movielens;
+# source movielens.sql;
+# show tables;
+
+# Run some sample queries to verify if data is imported successfully
+# SELECT * FROM movies limit 10; -  Display the first ten rows in movies table
+
+# describe ratings;  - understand the table schema of ratings table
+
+# Query for selecting movies based on rating count - 
+
+# SELECT movies.title, COUNT(ratings.movie_id) AS ratingCount
+  FROM movies
+  INNER JOIN ratings
+  ON movies.id = ratings.movie_id
+  GROUP BY movies.title
+  ORDER BY ratingCount;
+  
+  
+# Granting all the privilizes (on movielens database) for importing from MySQL to Hadoop and exporting from Hadoop to Mysql and other options
+# GRANT ALL PRIVILEGES ON movielens.* to ''@'localhost';
+    
+# **** Ignore for the demo ****
+
+# Adding sample data  - For testing on external database and local machine
 Step 1: Download employees.sql from 
 https://gitlab.cs.wwu.edu/tranerj/sql_1/blob/master/employees.sql
 https://gitlab.cs.wwu.edu/tranerj/sql_1/raw/master/employees.sql
@@ -8,6 +49,7 @@ Step 2: Download and Install MySQL in your machine
 Step 3: Import data in to MySQL
 > SOURCE employees.sql;
 
+# **** Ignore for the demo ****
 
 # Sqoop commands - 
 
@@ -18,11 +60,11 @@ Step 3: Import data in to MySQL
 
 # Sqoop – IMPORT Command: Import a table 'employees' in employees database in to HDFS - ***
 
-> sqoop import --connect jdbc:mysql://10.0.2.2/employees 
+> sqoop import --connect jdbc:mysql://localhost/movielens 
         --driver com.mysql.jdbc.Driver
         --username root
-        --password root 
-        --table employees
+        --password hadoop 
+        --table movies
 
 One line: sqoop import --connect jdbc:mysql://10.0.2.2/employees --driver com.mysql.jdbc.Driver --username root --password root --table employees
 
@@ -89,21 +131,21 @@ One line: sqoop import --connect jdbc:mysql://10.0.2.2/employees --driver com.my
 One line: sqoop import-all-tables --connect jdbc:mysql://10.0.2.2/employees --driver com.mysql.jdbc.Driver --username root --password root --target-dir /data_dump_hadoop/employees_database
 
 
-# Sqoop – List Databases: ***
+# Sqoop – List Databases: *** - Formatted
 
-  > sqoop list-databases --connect jdbc:mysql://10.0.2.2/ 
-	      --username root
-          --password root
+  > sqoop list-databases --connect jdbc:mysql://localhost/ 
+	  --username root
+          --password hadoop
 
-One line: sqoop list-databases --connect jdbc:mysql://10.0.2.2/ --username root --password root
+One line: sqoop list-databases --connect jdbc:mysql://localhost/ --username root --password hadoop
 
-# Sqoop – List Tables: List all the tables in employees tables. Best for checking the database or Mysql connection ***
+# Sqoop – List Tables: List all the tables in employees tables. Best for checking the database or Mysql connection *** - Formatted
   
-  > sqoop list-tables --connect jdbc:mysql://10.0.2.2/employees 
-	      --username root
-          --password root
+  > sqoop list-tables --connect jdbc:mysql://localhost/hive 
+	  --username root
+          --password hadoop
 
-One line: sqoop list-tables --connect jdbc:mysql://10.0.2.2/employees --username root --password root
+One line: sqoop list-tables --connect jdbc:mysql://localhost/hive --username root --password hadoop
 
 # Sqoop – Export: Export employees directory in HDFS to employees database, emp_exported table in MySQL - ***
 
