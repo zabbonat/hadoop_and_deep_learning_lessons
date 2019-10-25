@@ -96,6 +96,27 @@ Others -
   
   # Run with Amazon EMR(Elastic map reduce) - 
   
+  Note: For running a MapReduce(MR) job on Amazon EMR you first need an account on aws.amazon.com. 
+        Once you give the card details, (you will be billed per usage and the cost of usage is also very less)
+        you will be able to access the security keys (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+        to access map reduce on your local machine
+  
+  To run on a single EMR node: 
+      > python MostPopularMovie.py -r emr --items=ml-100k/u.item   
+          ml-100k/u.data
+          
+   To run on 4 EMR nodes: 
+       > python MostPopularMovie.py -r emr --num-ec2-instances=4 --  
+           items=ml-100k/u.item ml-100k/u.data
+
+    Note: For the above commands to work we should be setting    
+         AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY 
+         prior to execution of the python script. 
+         
+         For windows: you need to create an environmental variables for these 2
+         For Linux and Mac: you can just do export AWS_ACCESS_KEY_ID=$key_value$
+
+  
   
   
  
