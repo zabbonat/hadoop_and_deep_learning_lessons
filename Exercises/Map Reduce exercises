@@ -84,6 +84,7 @@ Others -
  # Using nano
    nano file_name.py  - to open a file using nano editor
    ctrl + x - to come out of nano editor
+   ctrl + o - to edit a file
    
   # Running with mrjob
   
@@ -116,8 +117,13 @@ Others -
          For windows: you need to create an environmental variables for these 2
          For Linux and Mac: you can just do export AWS_ACCESS_KEY_ID=$key_value$
 
+ Other MR scripts:
+ For sorting the results:
+ # wget http://media.sundog-soft.com/hadoop/TopMovies.py
+ 
   
-  
+  Other notes: 
+  Sort results in reducer: yield str(sum(values)).zfill(5), key
   
  
 
