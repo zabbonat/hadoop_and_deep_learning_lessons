@@ -50,7 +50,20 @@ One line: sqoop import --connect jdbc:mysql://10.0.2.2/employees --driver com.my
 
 One line: sqoop import --connect jdbc:mysql://10.0.2.2/employees --driver com.mysql.jdbc.Driver --username root --password root --table employees --m 3 --where "emp_no > 490000" --target-dir /data_dump_hadoop/new_employees
 
-# Sqoop – Incremental Import: Import only the new data - Not working
+# Sqoop – IMPORT data from MySQL directly into Hive
+
+> sqoop import --connect jdbc:mysql://10.0.2.2/employees 
+        --driver com.mysql.jdbc.Driver 
+        --username root
+        --password root 
+        --table employees
+	--hive-import
+	
+One line: sqoop import --connect jdbc:mysql://10.0.2.2/employees --driver com.mysql.jdbc.Driver --username root --password root --table employees --hive-import
+
+
+
+# Sqoop – Incremental Import: Import only the new data - Not working (To keep your relational database and Hadoop in sync) (--check-column and --last-value)
 
 > sqoop import --connect jdbc:mysql://10.0.2.2/employees 
 		--driver com.mysql.jdbc.Driver
@@ -105,6 +118,25 @@ One line: sqoop list-tables --connect jdbc:mysql://10.0.2.2/employees --username
         --export-dir /data_dump_hadoop/employees
 
 One line: sqoop export --connect jdbc:mysql://10.0.2.2/employees --driver com.mysql.jdbc.Driver --username root --password root --table employees_exported --export-dir /data_dump_hadoop/employees
+
+Note: Target table must alreay exist in MySQL, with columns in expected order
+
+# Sqoop – Export data from Hive to MySQL
+
+  Useful command: CREATE TABLE employees_exported LIKE employees;	
+
+  > sqoop export 
+        --connect jdbc:mysql://10.0.2.2/employees -m 3
+        --driver com.mysql.jdbc.Driver
+        --username root 
+        --password root
+        --table employees_exported 
+        --export-dir /apps/hive/warehouse/employees
+	--input-fields-terminated-by '\0001'
+
+One line: sqoop export --connect jdbc:mysql://10.0.2.2/employees --driver com.mysql.jdbc.Driver --username root --password root --table employees_exported --export-dir /apps/hive/warehouse/employees --input-fields-terminated-by '\0001'
+
+Note: Target table must alreay exist in MySQL, with columns in expected order
 
 # Sqoop – Codegen: Codegen generates the DAO class automatically. It generates DAO class in Java, based on the Table schema structure. - ***
 
