@@ -36,4 +36,72 @@ Others -
 => Similar movies (recommendation engine based on cosine similarity) 
 
 
+# Running map reduce jobs on Horton works cluster
+
+# First of all we need to install required softwares for Map reduce
+
+# To install softwares on the Hortonworks sandbox we need to login as superuser by using command below
+# su root 
+(Initial password is hadoop and you are required to change it immediately)
+
+# If you have installated ***HDP 2.6.5*** (Latest sandbox version) -
+
+# Install PIP -
+  Utility for installing Python packages
+  yum install python-pip
+  
+# Install MR job
+  pip install mrjob==0.5.11
+  
+# Install Nano text editor
+  yum install nano
+  
+# Download data files and script
+  wget http://media.sundog-soft.com/hadoop/ml-100k/u.data
+  wget http://media.sundog-soft.com/hadoop/RatingsBreakdown.py
+  
+# If you have installated ***HDP 2.5*** (Old sandbox version) -
+
+# Install PIP -
+  cd /etc/yum.repos.d
+  cp sandbox.repo /tmp
+  rm sandbox.repo
+  cd /home/maria_dev
+  yum install python-pip
+  
+# Install MR job - 
+  pip install google-api-python-client==1.6.4
+  pip install mrjob==0.5.11
+  
+# Install Nano text editor
+  yum install nano
+   
+# Download data files and script
+  wget http://media.sundog-soft.com/hadoop/ml-100k/u.data - this is our ratings data file from our movie lens dataset
+  wget http://media.sundog-soft.com/hadoop/RatingsBreakdown.py - this is the map reduce script 
+  
+  
+ # Using nano
+   nano file_name.py  - to open a file using nano editor
+   ctrl + x - to come out of nano editor
+   
+  # Running with mrjob
+  
+  # Run locally - 
+     python RatingsBreakdown.py u.data
+     
+  # Run with Hadoop - 
+     python MostPopularMovie.py -r hadoop 
+     --hadoop-streaming-jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar u.data
+  
+  # Run with Amazon EMR(Elastic map reduce) - 
+  
+  
+  
+ 
+
+
+
+
+
 
