@@ -15,7 +15,7 @@ For movie lens data set -
 
 
 
-Others - 
+Others(For your practice, solutions are available in Map_Reduce folder) - 
 
 => Count Friends by Age 
 
@@ -36,13 +36,14 @@ Others -
 => Similar movies (recommendation engine based on cosine similarity) 
 
 
-# Running map reduce jobs on Horton works cluster
+# ***** Running map reduce jobs on Horton works virtual machine **** 
 
 # First of all we need to install required softwares for Map reduce
 
 # To install softwares on the Hortonworks sandbox we need to login as superuser by using command below
 # su root 
 (Initial password is hadoop and you are required to change it immediately)
+Note: we changed the root password to "bigdata@roma" (For your future reference)
 
 # If you have installated ***HDP 2.6.5*** (Latest sandbox version) -
 
@@ -65,7 +66,7 @@ Others -
 # Install PIP -
   cd /etc/yum.repos.d
   cp sandbox.repo /tmp
-  rm sandbox.repo
+  rm sandbox.repo (Ensure that you type yes or y after executing this command, otherwise the file will not be deleted)
   cd $HOME
   yum install python-pip
   
@@ -81,7 +82,7 @@ Others -
   wget http://media.sundog-soft.com/hadoop/RatingsBreakdown.py - this is the map reduce script 
   
   
- # Using nano
+ # Using nano (you can use vi editor as well)
    nano file_name.py  - to open a file using nano editor
    ctrl + x - to come out of nano editor
    ctrl + o - to edit a file
@@ -92,7 +93,7 @@ Others -
      python RatingsBreakdown.py u.data
      
   # Run with Hadoop - 
-     python MostPopularMovie.py -r hadoop 
+     python RatingsBreakdown.py -r hadoop 
      --hadoop-streaming-jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar u.data
   
   # Run with Amazon EMR(Elastic map reduce) - 
@@ -119,16 +120,8 @@ Others -
 
  Other MR scripts:
  For sorting the results:
- # wget http://media.sundog-soft.com/hadoop/TopMovies.py
+ # wget http://media.sundog-soft.com/hadoop/TopMovies.py 
+ (download this file in the same user folder /user/maria_dev since u.data file is available in this folder.)
  
-  
   Other notes: 
   Sort results in reducer: yield str(sum(values)).zfill(5), key
-  
- 
-
-
-
-
-
-
