@@ -9,10 +9,10 @@
 
 # Adding sample data  - For testing on Hortonworks sandbox
 
+# wget http://media.sundog-soft.com/hadoop/movielens.sql - Download the file from Internet on to Hortonworks sandbox
+# cat movielens.sql - To preview the downloaded file
 # mysql -u root -p (password is hadoop)
 # create database movielens;
-# wget http://media.sundog-soft.com/hadoop/movielens.sql - Download the file from Internet on to Hortonworks sandbox
-# less movielens.sql - To preview the downloaded file
 # SET NAMES 'utf8'; - Set some variables for character format
 # SET CHARACTER SET 'utf8';
 # use movielens;
@@ -33,11 +33,10 @@
   GROUP BY movies.title
   ORDER BY ratingCount;
   
-  
 # Granting all the privilizes (on movielens database) for importing from MySQL to Hadoop and exporting from Hadoop to Mysql and other options
 # GRANT ALL PRIVILEGES ON movielens.* to ''@'localhost';
     
-# **** Ignore for the demo ****
+# ************ Ignore for the demo **************
 
 # Adding sample data  - For testing on external database and local machine
 Step 1: Download employees.sql from 
@@ -49,11 +48,11 @@ Step 2: Download and Install MySQL in your machine
 Step 3: Import data in to MySQL
 > SOURCE employees.sql;
 
-# **** Ignore for the demo ****
+# ************* Ignore for the demo **************
 
 # Sqoop commands - 
 
-> sqoop - to see list of available commands 
+> sqoop help - to see list of available commands 
 
 > sqoop help list-databases - for knowing syntax of a particular Sqoop command
 
@@ -75,7 +74,7 @@ One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.m
         --username root 
         --password hadoop 
         --table movies --m 1 
-        --target-dir /data_dump_hadoop/movies
+        --target-dir /demo/movies
 
 
 One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table movies --m 1 --target-dir /data_dump_hadoop/movies
@@ -87,22 +86,21 @@ One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.m
         --username root
         --password hadoop 
         --table movies 
-        --where "id > 1000" 
-        --target-dir /data_dump_hadoop/new_movies
+        --where "id < 1000" 
+        --target-dir /demo/new_movies
 
 One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table movies --where "id < 1000" --target-dir /data_dump_hadoop/new_movies
 
 # Sqoop – IMPORT data from MySQL directly into Hive
 
-> sqoop import --connect jdbc:mysql://10.0.2.2/employees 
+> sqoop import --connect jdbc:mysql://localhost/movielens 
         --driver com.mysql.jdbc.Driver 
         --username root
-        --password root 
-        --table employees
+        --password hadoop 
+        --table ratings
 	--hive-import
 	
-One line: sqoop import --connect jdbc:mysql://10.0.2.2/employees --driver com.mysql.jdbc.Driver --username root --password root --table employees --hive-import
-
+One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table ratings --hive-import
 
 
 # Sqoop – Incremental Import: Import only the new data - Not working (To keep your relational database and Hadoop in sync) (--check-column and --last-value)
@@ -112,12 +110,12 @@ One line: sqoop import --connect jdbc:mysql://10.0.2.2/employees --driver com.my
         --username root
         --password hadoop  
         --table movies  
-        --target-dir /data_dump_hadoop/latest_movies
+        --target-dir /demo/new_movies
         --incremental append 
-        --target-direct-column id 
-        --last-value 1600
+        --check-column id 
+        --last-value 999
 
-One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table movies --target-dir /data_dump_hadoop/latest_movies --incremental append --target-direct-column id --last-value 1600
+One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table movies --target-dir /demo/new_movies --incremental append --check-column id --last-value 999
 
 
 # Sqoop – Import All Tables: Import all the tables in employees database 
@@ -127,7 +125,7 @@ One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.m
            --driver com.mysql.jdbc.Driver	
           --username root
           --password hadoop  
-          ###--target-dir /data_dump_hadoop/movielens - not working
+          ###--target-dir /demo/movielens - not working
 
 One line: sqoop import-all-tables --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop
 
@@ -157,9 +155,9 @@ One line: sqoop list-tables --connect jdbc:mysql://localhost/hive --username roo
         --username root 
         --password hadoop
         --table new_movies 
-        --export-dir /data_dump_hadoop/new_movies
+        --export-dir /demo/new_movies
 
-One line: sqoop export --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table new_movies --export-dir /data_dump_hadoop/new_movies
+One line: sqoop export --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table new_movies --export-dir /demo/new_movies
 
 Note: Target table must alreay exist in MySQL, with columns in expected order
 
