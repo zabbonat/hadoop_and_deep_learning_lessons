@@ -28,12 +28,58 @@ Once the reset is done, you have to restart the ambari agent for your changes to
 # ambari-agent restart
 
 
-
-
-
-
 Go to ambari - 
 http://localhost:8080/
-Login: maria_dev / maria_dev
+Login with admin with the new password
 
+Hover over on the Services tab on top right and click on Spark
 
+Click to Configs tabs and
+
+Change the log level of Spark, for that
+
+Click on Advanced Log4j-properties and change
+log4j.rootCategory=INFO.console to log4j.rootCategory=ERROR.console
+
+Hit save on top right and add a comment "Changed log level of Spark to ERROR" (you can give any comment)
+
+For changes to take effect, you have to restart all services, so click on restart button on top right and wait for the process to complete
+
+Do the same for Spark 2 service
+
+# Next we have to ensure that we have movielens dataset inn our folder, /user/maria_dev 
+a folder ml-100k with 2 files u.data and u.item,
+Go to files view and check if this data is present are not, else download from internet and upload on to HDFS using Files view
+
+or
+
+you can login as maria_dev using putty, execute following commands
+# mkdir ml-100k
+# cd ml-100k
+# wget http://media.sundog-soft.com/hadoop/ml-100k/u.item
+# wget http://media.sundog-soft.com/hadoop/ml-100k/u.data
+
+# cd ..
+you should be in maria_dev directory now
+
+# pwd
+should give you /user/maria_dev
+
+Get the scripts for running Spark on HDP cluster
+# wget http://media.sundog-soft.com/hadoop/Spark.zip
+
+Unzip the downloaded Spark.zip file
+
+# unzip Spark.zip
+
+to get actual scripts
+
+The file that we want to execute is LowestRatedMovieSpark.py
+
+To preview use cat command
+
+# cat LowestRatedMovieSpark.py
+
+To run this use following command spark-submit which sets up all the Spark related services and runs your script on the cluster,
+
+# spark-submit LowestRatedMovieSpark.py
