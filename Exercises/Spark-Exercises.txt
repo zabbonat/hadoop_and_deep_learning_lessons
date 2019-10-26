@@ -83,3 +83,8 @@ To preview use cat command
 To run this use following command spark-submit which sets up all the Spark related services and runs your script on the cluster,
 
 # spark-submit LowestRatedMovieSpark.py
+
+Note: spark-submit can take a bunch of parameters as well, like which cluster you want to run on or how much memory you want to allocate to each cluster etc.., Unless you are hadoop administrator it is not usually important
+
+
+
