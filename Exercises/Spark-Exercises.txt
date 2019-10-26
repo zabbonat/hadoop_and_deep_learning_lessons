@@ -1,1 +1,39 @@
 
+# Running spark on Hortonworks sandbox - 
+
+Start your Hortonworks virtual machine - 
+
+# Before using Spark using Hortonworks, we need to make some configuration changes using Ambari, for this you need to login as 
+  admin, which is explained as below
+
+# First of all you need to set admin password for Ambari, to do this you need to login to virtual machine via ssh using Putty(windows) or terminal (linux or Mac)
+
+ssh maria_dev@127.0.0.1 -p 2222
+(password is maria_dev)
+
+Once logged in, you have to login as superuser (root)
+
+# su root
+(the default password is hadoop)
+Note: you will be asked to reset the default password immediately
+For the sake of easeness set the password as bigdata@roma (and remember this)
+
+Once logged in as root, you will be able to reset the ambari admin password using,
+
+# ambari-admin-password-reset 
+(At this point you’ll be prompted to enter your password for the Ambari admin user)
+Note: set the password as bigdata@roma for easeness and uniformity
+
+Once the reset is done, you have to restart the ambari agent for your changes to take effect. You can do this using,
+# ambari-agent restart
+
+
+
+
+
+
+Go to ambari - 
+http://localhost:8080/
+Login: maria_dev / maria_dev
+
+
