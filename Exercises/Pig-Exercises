@@ -61,3 +61,13 @@ finalResultsSorted = ORDER finalResults BY numRatings DESC;
 
 DUMP finalResultsSorted;
 
+
+-- Word count using Pig
+Word count in Pig Lines=LOAD ‘input/hadoop.log’ AS (line: chararray);
+Words = FOREACH Lines GENERATE FLATTEN (TOKENIZE (line)) AS word;
+Groups = GROUP Words BY word;
+Counts = FOREACH Groups GENERATE group, COUNT (Words);
+Results = ORDER Words BY Counts DESC;
+Top5 = LIMIT Results 5;
+STORE Top5 INTO /output/top5words;
+
