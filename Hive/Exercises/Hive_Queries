@@ -1,0 +1,58 @@
+# Accessing Hive online
+http://demo.gethue.com/hue/editor/?type=hiv
+
+# Useful reference for Hive commands
+https://www.tutorialspoint.com/hive/
+
+# HIVE language manual - 
+https://cwiki.apache.org/confluence/display/Hive/LanguageManual
+
+# Hive Queries - 
+
+# Create a new table - 
+
+CREATE TABLE IF NOT EXISTS employee ( eid int, name String,
+salary String, destination String)
+COMMENT ‘Employee details’
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ‘\t’
+LINES TERMINATED BY ‘\n’
+STORED AS TEXTFILE;
+
+
+# Use partitioned by - 
+CREATE TABLE employees 
+(id INT, firstname STRING, lastname 	STRING) 
+PARTITIONED BY (department String);
+
+# Using Bucketing - 
+CREATE TABLE customers 
+(id INT, firstname STRING, lastname STRING) 
+PARTITIONED BY (orderID INT) 
+INTO 5 BUCKETS;
+
+
+# Word count in a text file in Hive QL -
+
+DROP TABLE IF EXISTS docs; 
+CREATE TABLE docs (line STRING); 
+LOAD DATA INPATH 'input_file' OVERWRITE INTO TABLE docs;
+CREATE TABLE word_counts AS 
+SELECT word, count(1) AS count FROM 
+	(SELECT explode(split(line, '\s')) AS word FROM docs) temp 
+GROUP BY word 
+ORDER BY word;
+
+
+# Find movie with highest average rating
+CREATE VIEW IF NOT EXISTS avgRatings AS
+SELECT movieID, AVG(rating) as avgRating, COUNT(movieID) as ratingCount
+FROM ratings
+GROUP BY movieID
+ORDER BY avgRating DESC;
+
+SELECT n.title, avgRating
+FROM avgRatings t JOIN names n ON t.movieID = n.movieID
+WHERE ratingCount > 10;
+
+

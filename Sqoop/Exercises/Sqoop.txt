@@ -1,0 +1,191 @@
+# To connect to Mysql on horton works sandbox - 
+#Connect to terminal using Putty (if using windows) or ssh maria_dev@127.0.0.1 -p 2222
+# mysql -u root -p (password is hadoop)
+# show databases; - List all the available databases
+# use hive; -  Use hive data base (which comes inbuilt
+# show tables; - List all the tables in movie lens database
+# exit - To exit the MySQL prompt
+
+
+# Adding sample data  - For testing on Hortonworks sandbox
+
+# wget http://media.sundog-soft.com/hadoop/movielens.sql - Download the file from Internet on to Hortonworks sandbox
+# cat movielens.sql - To preview the downloaded file
+# mysql -u root -p (password is hadoop)
+# create database movielens;
+# SET NAMES 'utf8'; - Set some variables for character format
+# SET CHARACTER SET 'utf8';
+# use movielens;
+# source movielens.sql;
+# show tables;
+
+# Run some sample queries to verify if data is imported successfully
+# SELECT * FROM movies limit 10; -  Display the first ten rows in movies table
+
+# describe ratings;  - understand the table schema of ratings table
+
+# Query for selecting movies based on rating count - 
+
+# SELECT movies.title, COUNT(ratings.movie_id) AS ratingCount
+  FROM movies
+  INNER JOIN ratings
+  ON movies.id = ratings.movie_id
+  GROUP BY movies.title
+  ORDER BY ratingCount;
+  
+# Granting all the privilizes (on movielens database) for importing from MySQL to Hadoop and exporting from Hadoop to Mysql and other options
+# GRANT ALL PRIVILEGES ON movielens.* to ''@'localhost';
+    
+# ************ Ignore for the demo **************
+
+# Adding sample data  - For testing on external database and local machine
+Step 1: Download employees.sql from 
+https://gitlab.cs.wwu.edu/tranerj/sql_1/blob/master/employees.sql
+https://gitlab.cs.wwu.edu/tranerj/sql_1/raw/master/employees.sql
+
+Step 2: Download and Install MySQL in your machine
+
+Step 3: Import data in to MySQL
+> SOURCE employees.sql;
+
+# ************* Ignore for the demo **************
+
+# Sqoop commands - 
+
+> sqoop help - to see list of available commands 
+
+> sqoop help list-databases - for knowing syntax of a particular Sqoop command
+
+
+# Sqoop – IMPORT Command: Import a table 'movies' in movielens database in to HDFS - ***
+
+> sqoop import --connect jdbc:mysql://localhost/movielens 
+        --driver com.mysql.jdbc.Driver
+        --username root
+        --password hadoop 
+        --table movies
+
+One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table movies
+
+# Sqoop – IMPORT Command with target directory: Import a table 'movies' in movielens database in to directory movies in HDFS - ***
+
+> sqoop import --connect jdbc:mysql://localhost/movielens
+        --driver com.mysql.jdbc.Driver
+        --username root 
+        --password hadoop 
+        --table movies --m 1 
+        --target-dir /demo/movies
+
+
+One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table movies --m 1 --target-dir /data_dump_hadoop/movies
+
+# Sqoop – IMPORT Command with Where Clause: Import only a section of table - ***
+
+> sqoop import --connect jdbc:mysql://localhost/movielens 
+        --driver com.mysql.jdbc.Driver 
+        --username root
+        --password hadoop 
+        --table movies 
+        --where "id < 1000" 
+        --target-dir /demo/new_movies
+
+One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table movies --where "id < 1000" --target-dir /data_dump_hadoop/new_movies
+
+# Sqoop – IMPORT data from MySQL directly into Hive
+
+> sqoop import --connect jdbc:mysql://localhost/movielens 
+        --driver com.mysql.jdbc.Driver 
+        --username root
+        --password hadoop 
+        --table ratings
+	--hive-import
+	
+One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table ratings --hive-import
+
+
+# Sqoop – Incremental Import: Import only the new data - Not working (To keep your relational database and Hadoop in sync) (--check-column and --last-value)
+
+> sqoop import --connect jdbc:mysql://localhost/movielens 
+	--driver com.mysql.jdbc.Driver
+        --username root
+        --password hadoop  
+        --table movies  
+        --target-dir /demo/new_movies
+        --incremental append 
+        --check-column id 
+        --last-value 999
+
+One line: sqoop import --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table movies --target-dir /demo/new_movies --incremental append --check-column id --last-value 999
+
+
+# Sqoop – Import All Tables: Import all the tables in employees database 
+
+  > sqoop import-all-tables 
+           --connect jdbc:mysql://localhost/movielens 
+           --driver com.mysql.jdbc.Driver	
+          --username root
+          --password hadoop  
+          ###--target-dir /demo/movielens - not working
+
+One line: sqoop import-all-tables --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop
+
+# Sqoop – List Databases: ***
+
+  > sqoop list-databases --connect jdbc:mysql://localhost/ 
+	  --username root
+          --password hadoop
+
+One line: sqoop list-databases --connect jdbc:mysql://localhost/ --username root --password hadoop
+
+# Sqoop – List Tables: List all the tables in employees tables. Best for checking the database or Mysql connection ***
+  
+  > sqoop list-tables --connect jdbc:mysql://localhost/hive 
+	  --username root
+          --password hadoop
+
+One line: sqoop list-tables --connect jdbc:mysql://localhost/hive --username root --password hadoop
+
+# Sqoop – Export: Export new_movies directory in HDFS to movielens database, new_movies table in MySQL - ***
+
+  Useful command: CREATE TABLE new_movies LIKE movies; - Cloning the schema of movies table	
+
+  > sqoop export 
+        --connect jdbc:mysql://localhost/movielens 
+        --driver com.mysql.jdbc.Driver
+        --username root 
+        --password hadoop
+        --table new_movies 
+        --export-dir /demo/new_movies
+
+One line: sqoop export --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table new_movies --export-dir /demo/new_movies
+
+Note: Target table must alreay exist in MySQL, with columns in expected order
+
+# Sqoop – Export data from Hive to MySQL
+
+  Useful command: CREATE TABLE new_movies_hive LIKE movies;	
+
+  > sqoop export 
+        --connect jdbc:mysql://localhost/movielens
+        --driver com.mysql.jdbc.Driver
+        --username root 
+        --password hadoop
+        --table new_movies_hive 
+        --export-dir /apps/hive/warehouse/movies
+	--input-fields-terminated-by '\0001'
+
+One line: sqoop export --connect jdbc:mysql://localhost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table new_movies_hive --export-dir /apps/hive/warehouse/movies --input-fields-terminated-by '\0001'
+
+Note: Target table must alreay exist in MySQL, with columns in expected order
+
+# Sqoop – Codegen: Codegen generates the DAO class automatically. It generates DAO class in Java, based on the Table schema structure. - ***
+
+  > sqoop codegen 
+        --connect jdbc:mysql://locahost/movielens 
+        --driver com.mysql.jdbc.Driver            
+        --username root
+        --password hadoop 
+        --table movies
+
+One line: sqoop codegen --connect jdbc:mysql://locahost/movielens --driver com.mysql.jdbc.Driver --username root --password hadoop --table movies
+

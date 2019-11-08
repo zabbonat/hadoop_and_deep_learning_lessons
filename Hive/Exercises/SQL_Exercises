@@ -1,0 +1,4 @@
+# Select top 5 rows
+SELECT * 
+FROM table 
+ORDER BY view_counter limit 5;
